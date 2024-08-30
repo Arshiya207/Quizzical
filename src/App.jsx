@@ -22,38 +22,43 @@ export default function App() {
         setIsLoading(true);
         setLoadFinish(false);
         const res = await fetch("https://opentdb.com/api.php?amount=5");
-        const data = await res.json();
-        const crudeDataArray = data.results;
-        const useableDataArray = crudeDataArray.map((que) => {
-          const answers = [
-            {
-              id: nanoid(),
-              value: he.decode(que.correct_answer),
-              isSelected: false,
-              isTrue: true,
-              gotItRight: null,
-            },
-          ];
-          que.incorrect_answers.forEach((answ) => {
-            answers.push({
-              id: nanoid(),
-              value: he.decode(answ),
-              isSelected: false,
-              isTrue: false,
-              gotItRight: null,
+        if (res.ok) {
+          const data = await res.json();
+          const crudeDataArray = data.results;
+
+          const useableDataArray = crudeDataArray.map((que) => {
+            const answers = [
+              {
+                id: nanoid(),
+                value: he.decode(que.correct_answer),
+                isSelected: false,
+                isTrue: true,
+                gotItRight: null,
+              },
+            ];
+            que.incorrect_answers.forEach((answ) => {
+              answers.push({
+                id: nanoid(),
+                value: he.decode(answ),
+                isSelected: false,
+                isTrue: false,
+                gotItRight: null,
+              });
             });
+
+            return {
+              id: nanoid(),
+              question: he.decode(que.question),
+              answers: shuffleArray(answers),
+              unanswered: null,
+            };
           });
 
-          return {
-            id: nanoid(),
-            question: he.decode(que.question),
-            answers: shuffleArray(answers),
-            unanswered: null,
-          };
-        });
-
-        setQuestions(useableDataArray);
-        setLoadFinish(true);
+          setQuestions(useableDataArray);
+          setLoadFinish(true);
+        } else {
+          throw new Error(`Error code ${res.status}`);
+        }
       } catch (error) {
         alert("there is an error " + error);
         setIsLoading(false);
