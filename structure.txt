@@ -1,0 +1,42 @@
+{
+    "question":"What is the Swedish word for &quot;window&quot;?",
+    "correct_answer":"F&ouml;nster",
+    "incorrect_answers": [
+        "H&aring;l",
+        "Sk&auml;rm",
+        "Ruta"
+    ]
+
+}
+
+
+{
+    id:,
+    question:,
+    unanswerd:,
+    answers:[
+        {
+            id:,
+            value:H&aring;l,
+            isSelected:false,
+            result:true,
+            gotItRight:null
+        },
+           {
+            id:,
+            value:H&aring;l,
+            isSelected:false,
+            result:true,
+            gotItRight:null
+        },
+           {
+             id:,
+            value:H&aring;l,
+            isSelected:false,
+            result:true,
+            gotItRight:null
+        }
+    ]
+    
+    
+}
