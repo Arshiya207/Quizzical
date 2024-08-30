@@ -3,9 +3,7 @@ export default function Loading(props) {
   React.useEffect(() => {
     const loadingElement = document.querySelector(".loading");
     function loadingTasks(e) {
-      console.log();
       if (e.propertyName === "opacity") {
-        console.log(e.propertyName);
         props.setGameVariables();
       }
     }
